@@ -1,0 +1,7 @@
+.idea/
+
+*.pyc
+*.swp
+.DS_Store
+answers
+.hg
