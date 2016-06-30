@@ -10,14 +10,13 @@ class AboutSets(Koan):
             'MacLeod', 'Malcolm', 'MacLeod']
 
         there_can_only_be_only_one = set(highlanders)
-
-        self.assertEqual(__, there_can_only_be_only_one)
+        self.assertEqual(set(['Malcolm', 'Matunas', 'MacLeod', 'Ramirez']), there_can_only_be_only_one)
 
     def test_sets_are_unordered(self):
-        self.assertEqual(set([__, __, __, __, __]), set('12345'))
+        self.assertEqual(set(['1', '2', '3', '4', '5']), set('12345'))
 
     def test_convert_the_set_into_a_list_to_sort_it(self):
-        self.assertEqual(__, sorted(set('13245')))
+        self.assertEqual(['1', '2', '3', '4', '5'], sorted(set('13245')))
 
     # ------------------------------------------------------------------
 
@@ -25,19 +24,25 @@ class AboutSets(Koan):
         scotsmen = set(['MacLeod', 'Wallace', 'Willie'])
         warriors = set(['MacLeod', 'Wallace', 'Leonidas'])
 
-        self.assertEqual(__, scotsmen - warriors)
-        self.assertEqual(__, scotsmen | warriors)
-        self.assertEqual(__, scotsmen & warriors)
-        self.assertEqual(__, scotsmen ^ warriors)
+        self.assertEqual(('Willie',), scotsmen - warriors)
+        self.assertEqual(('MacLeod', 'Wallace', 'Willie', 'Leonidas'), scotsmen | warriors)
+        self.assertEqual(('MacLeod', 'Wallace'), scotsmen & warriors)
+        self.assertEqual(('Willie', 'Leonidas'), scotsmen ^ warriors)
 
     # ------------------------------------------------------------------
 
     def test_we_can_query_set_membership(self):
-        self.assertEqual(__, 127 in set([127, 0, 0, 1]))
-        self.assertEqual(__, 'cow' not in set('apocalypse now'))
+        self.assertEqual(True, 127 in set([127, 0, 0, 1]))
+        self.assertEqual(True, 'cow' not in set('apocalypse now'))
 
     def test_we_can_compare_subsets(self):
-        self.assertEqual(__, set('cake') <= set('cherry cake'))
-        self.assertEqual(__, set('cake').issubset(set('cherry cake')))
+        """
+        s.issubset(t)
+        s <= t
+        测试是否 s 中的每一个元素都在 t 中
+        :return:
+        """
+        self.assertEqual(True, set('cake') <= set('cherry cake'))
+        self.assertEqual(True, set('cake').issubset(set('cherry cake')))
 
-        self.assertEqual(__, set('cake') > set('pie'))
+        self.assertEqual(False, set('cake') > set('pie'))
